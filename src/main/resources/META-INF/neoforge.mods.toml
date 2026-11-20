@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "pvzgeitem"
+version = "${file.jarVersion}"
+displayName = "PVZGE Items"
+description = '''
+将 PVZGE 的内容移植到 Minecraft
+Port the content of PVZGE to Minecraft.
+'''
+
+[[dependencies.pvzgeitem]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.pvzgeitem]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"

@@ -5,9 +5,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -26,23 +26,20 @@ public class PvzgeitemMod {
 
     /**
      * 创造模式标签页：武林寺庙。
-     * 物品尚未添加，NeoForge 会自动使用一个占位图标，待后续加入物品后再设置正式图标。
+     *
+     * 注意：Minecraft 不会显示一个既没有图标、又没有内容的标签页，
+     * 所以这里临时借用原版的「钟」当图标和占位内容（不需要任何贴图/模型）。
+     * 以后加入 PVZGE 物品时，把 icon 和 displayItems 里的 Items.BELL 换成自己的物品即可。
      */
     public static final Supplier<CreativeModeTab> WULIN_TEMPLE_TAB =
             CREATIVE_MODE_TABS.register("wulin_temple", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MODID + ".wulin_temple"))
-                    .icon(PvzgeitemMod::createTabIcon)
+                    .icon(() -> new ItemStack(Items.BELL))
                     .displayItems((parameters, output) -> {
-                        // 后续版本在此处添加物品
+                        // 临时占位：让标签页可见。以后加 PVZGE 物品时删掉这行
+                        output.accept(Items.BELL);
                     })
                     .build());
-
-    /**
-     * 暂未制作图标：有物品后改为 new ItemStack(物品.get())，当前先返回空图标。
-     */
-    private static ItemStack createTabIcon() {
-        return ItemStack.EMPTY;
-    }
 
     public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);

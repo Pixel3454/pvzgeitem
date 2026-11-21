@@ -1,3 +1,6 @@
 {
-  "itemGroup.pvzgeitem.wulin_temple": "武林寺庙"
+  "itemGroup.pvzgeitem.wulin_temple": "武林寺庙",
+  "item.pvzgeitem.nunchaku": "双截棍",
+  "key.pvzgeitem.knockback": "双截棍·击退",
+  "key.categories.pvzgeitem": "武林寺庙"
 }

@@ -1,3 +1,6 @@
 {
-  "itemGroup.pvzgeitem.wulin_temple": "Wulin Temple"
+  "itemGroup.pvzgeitem.wulin_temple": "Wulin Temple",
+  "item.pvzgeitem.nunchaku": "Nunchaku",
+  "key.pvzgeitem.knockback": "Nunchaku Knockback",
+  "key.categories.pvzgeitem": "Wulin Temple"
 }

@@ -15,15 +15,16 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
 /**
  * 客户端专用：R 键绑定 + 第一人称动画。
- * 1.21.1 NeoForge 自带 IClientItemExtensions，不需要安装任何动画 mod 前置。
+ * 1.21.1 的 @EventBusSubscriber 会自动分流：
+ * RegisterKeyMappingsEvent / RegisterClientExtensionsEvent 进 mod 总线，ClientTickEvent 进游戏总线。
+ * 不需要任何动画 mod 前置。
  */
-@EventBusSubscriber(modid = PvzgeitemMod.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = PvzgeitemMod.MODID, value = Dist.CLIENT)
 public class ClientSetup {
 
     /** 默认 R，可在 选项 → 控制 → 按键绑定 里改。 */
@@ -40,9 +41,6 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerExtensions(RegisterClientExtensionsEvent event) {
-        // 把 R 键检测挂到游戏事件总线（只有客户端会执行到这里）
-        NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post e) -> onClientTick(e));
-
         event.registerItem(new IClientItemExtensions() {
             @Override
             public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player,
@@ -68,6 +66,7 @@ public class ClientSetup {
         }, ModItems.NUNCHAKU.get());
     }
 
+    @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
         while (KNOCKBACK_KEY.consumeClick()) {
             LocalPlayer player = Minecraft.getInstance().player;

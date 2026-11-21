@@ -51,7 +51,7 @@ public class PvzgeitemMod {
     }
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
-        var registrar = event.registrar(MODID);
+        var registrar = event.registrar("1");
         registrar.playToServer(
                 NunchakuKnockbackPayload.TYPE,
                 NunchakuKnockbackPayload.STREAM_CODEC,
